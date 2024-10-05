@@ -4,6 +4,7 @@ import { vowels, consonants, matras, conjuncts, boxArray } from "@/utils/utils";
 import Box from "@/components/Box";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/shared/ThemeToggle";
 
 export default function OdiaKeyboard() {
   const [text, setText] = useState("");
@@ -36,7 +37,10 @@ export default function OdiaKeyboard() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-8 w-full">
+    <div className="min-h-screen dark:bg-black relative dark:text-white flex flex-col items-center justify-center p-8 w-full">
+      <div className="absolute top-7 right-[10%]">
+        <ThemeToggle />
+      </div>
       <h1 className="text-4xl font-bold mb-8 text-center max-md:text-2xl max-md:mb-4">Odia Keyboard</h1>
 
       <div className="flex w-full max-w-6xl space-x-8 max-md:flex-col max-md:justify-center max-md:items-center">
@@ -46,13 +50,13 @@ export default function OdiaKeyboard() {
             ref={textAreaRef}
             onChange={(e) => setText(e.target.value)}
             rows="10"
-            className="w-full p-4 mb-6 bg-gray-900 text-white border border-gray-700 rounded-lg focus:outline-none text-2xl focus:ring-2 focus:ring-indigo-500"
+            className="w-full p-4 mb-6 dark:bg-gray-900 dark:text-white border border-gray-700 dark:border-white rounded-lg focus:outline-none text-2xl focus:ring-2 focus:ring-indigo-500"
             placeholder="Type here or use the keyboard below..."
           />
           <Button
             onClick={copyToClipboard}
             variant="outline"
-            className="w-[30%] max-md:w-full text-black p-6 font-bold"
+            className="w-[30%] max-md:w-full text-black dark:text-white border-2 p-6 font-bold"
           >
             Copy to clipboard
           </Button>
