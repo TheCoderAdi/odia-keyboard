@@ -83,8 +83,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #333; /* Background color of the scrollbar track */
+  background: #f7f7f7; /* Background color of the scrollbar track */
   border-radius: 8px; /* Rounded corners for the track */
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #333; /* Background color of the scrollbar track */
 }
 
 ::-webkit-scrollbar-thumb {
