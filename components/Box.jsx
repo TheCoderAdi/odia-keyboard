@@ -1,8 +1,12 @@
 import React from "react";
 
-const Box = ({ title, letters, handleLetterClick }) => {
+const Box = ({ title, letters, handleLetterClick, boxLength, index }) => {
   return (
-    <div className="mb-5 w-full max-w-2xl">
+    <div
+      className={`w-full max-w-2xl ${
+        index === boxLength - 1 ? "pb-5" : "mb-5"
+      }`}
+    >
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
       <div className="flex flex-wrap justify-center space-x-2 space-y-2 max-md:justify-start">
         {letters.map((letter) => (

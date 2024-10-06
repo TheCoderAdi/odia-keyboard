@@ -69,6 +69,8 @@ export default function OdiaKeyboard() {
               title={box.title}
               letters={box.letters}
               handleLetterClick={handleLetterClick}
+              index={index}
+              boxLength={boxArray.length}
             />
           ))}
         </div>
