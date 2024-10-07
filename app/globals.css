@@ -105,3 +105,8 @@ body {
   scrollbar-width: thin; /* 'thin' or 'auto' */
   scrollbar-color: #555 #333; /* thumb color and track color */
 }
+
+.dark .introjs-tooltipbuttons a {
+  background: #333;
+  color: #fff;
+}
