@@ -5,7 +5,7 @@ const Box = ({ title, letters, handleLetterClick, boxLength, index }) => {
     <div
       className={`w-full max-w-2xl ${
         index === boxLength - 1 ? "pb-5" : "mb-5"
-      }`}
+      } box-${index}`}
     >
       <h3 className="text-xl font-semibold mb-4">{title}</h3>
       <div className="flex flex-wrap justify-center space-x-2 space-y-2 max-md:justify-start">
