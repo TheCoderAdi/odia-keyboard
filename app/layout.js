@@ -1,5 +1,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
+
+import "intro.js/introjs.css";
+
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/provider/theme-provider";
 
