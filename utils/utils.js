@@ -30,6 +30,10 @@ const conjuncts = [
     'ଣ୍ଡ', 'ଣ୍ଢ', 'ଦ୍ଡ'
 ];
 
+const numbers = [
+    '୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'
+];
+
 const boxArray = [
     {
         title: "Vowels",
@@ -46,8 +50,12 @@ const boxArray = [
     {
         title: "Conjuncts",
         letters: conjuncts
+    },
+    {
+        title: "Numbers",
+        letters: numbers
     }
 ]
 
 
-export { consonants, vowels, matras, conjuncts, boxArray };
+export { boxArray };
