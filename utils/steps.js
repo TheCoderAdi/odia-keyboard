@@ -1,5 +1,11 @@
 export const steps = [
     {
+        element: ".tut-question-mark",
+        intro: "Click here to see the key mappings!",
+        position: "right",
+        tooltipClass: "dark:bg-black dark:text-white",
+    },
+    {
         element: ".tut-theme-change",
         intro: "This is your theme toggle button!",
         position: "right",
