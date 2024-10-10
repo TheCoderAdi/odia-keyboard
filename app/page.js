@@ -1,15 +1,17 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { boxArray } from "@/utils/utils";
+import { boxArray, keyToBoxMap } from "@/utils/utils";
 import Box from "@/components/Box";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import introJs from "intro.js";
 import { steps } from "@/utils/steps";
+import KeyBindings from "@/components/shared/KeyBindings";
 
 export default function OdiaKeyboard() {
   const [text, setText] = useState("");
+  const [hover, setHover] = useState(false);
   const textAreaRef = useRef(null);
   const { toast } = useToast();
 
@@ -21,9 +23,7 @@ export default function OdiaKeyboard() {
     const updatedText = text.slice(0, start) + letter + text.slice(end);
     setText(updatedText);
 
-    if (window.innerWidth < 768) {
-      textArea.focus();
-    }
+    textArea.focus();
 
     setTimeout(() => {
       textArea.selectionStart = textArea.selectionEnd = start + letter.length;
@@ -32,6 +32,7 @@ export default function OdiaKeyboard() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(text);
+    textAreaRef.current.select();
     toast({
       title: "Copied to clipboard",
       description: "The text has been copied to your clipboard",
@@ -48,8 +49,31 @@ export default function OdiaKeyboard() {
     })
   }, []);
 
+  useEffect(() => {
+    const keyDownEvents = (e) => {
+      if (keyToBoxMap.hasOwnProperty(e.key)) {
+        scrollToTheBox(keyToBoxMap[e.key]);
+      }
+    }
+    const scrollToTheBox = (index) => {
+      let selectedBox = document.querySelector(`.box-${index}`);
+      if (selectedBox) {
+        selectedBox.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    document.addEventListener('keydown', keyDownEvents);
+
+    return () => {
+      document.removeEventListener('keydown', keyDownEvents);
+    }
+  }, [])
+
   return (
     <div className="min-h-screen dark:bg-black relative dark:text-white flex flex-col items-center justify-center p-8 w-full">
+      <div className="absolute top-7 left-[10%] tut-question-mark max:md:hidden">
+        <KeyBindings hover={hover} setHover={setHover} />
+      </div>
       <div className="absolute top-7 right-[10%] tut-theme-change">
         <ThemeToggle />
       </div>

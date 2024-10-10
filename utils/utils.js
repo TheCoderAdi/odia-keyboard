@@ -34,6 +34,22 @@ const numbers = [
     '୦', '୧', '୨', '୩', '୪', '୫', '୬', '୭', '୮', '୯'
 ];
 
+const keyToBoxMap = {
+    V: 0,
+    C: 1,
+    M: 2,
+    c: 3,
+    N: 4
+};
+
+const keyToBoxMapName = {
+    V: "Vowels",
+    C: "Consonants",
+    M: "Matras",
+    c: "Conjuncts",
+    N: "Numbers"
+};
+
 const boxArray = [
     {
         title: "Vowels",
@@ -58,4 +74,4 @@ const boxArray = [
 ]
 
 
-export { boxArray };
+export { boxArray, keyToBoxMap, keyToBoxMapName };
