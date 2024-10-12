@@ -69,6 +69,23 @@ export default function OdiaKeyboard() {
     }
   }, [])
 
+  const saveAsTextFile = () => {
+    const currentText = textAreaRef.current.value;
+
+    if (!currentText) return toast({
+      title: "No text to save",
+      description: "Please type something before saving"
+    })
+
+    const a = document.createElement('a')
+    const file = new Blob([currentText], { type: 'text/plain' });
+    const date = new Date().getMilliseconds()
+
+    a.href = URL.createObjectURL(file);
+    a.download = `${date}-odia-file.txt`
+    a.click();
+  }
+
   return (
     <div className="min-h-screen dark:bg-black relative dark:text-white flex flex-col items-center justify-center p-8 w-full">
       <div className="absolute top-7 left-[10%] tut-question-mark max:md:hidden">
@@ -89,13 +106,22 @@ export default function OdiaKeyboard() {
             className="tut-textarea w-full p-4 mb-6 dark:bg-gray-900 dark:text-white border border-gray-700 dark:border-white rounded-lg focus:outline-none text-2xl focus:ring-2 focus:ring-indigo-500"
             placeholder="Type here or use the keyboard below..."
           />
-          <Button
-            onClick={copyToClipboard}
-            variant="outline"
-            className="tut-copy-button w-[30%] max-md:w-full text-black dark:text-white border-2 p-6 font-bold"
-          >
-            Copy to clipboard
-          </Button>
+          <div className="flex gap-3 flex-wrap">
+            <Button
+              onClick={copyToClipboard}
+              variant="outline"
+              className="tut-copy-button w-[30%] max-md:w-full text-black dark:text-white border-2 p-6 font-bold"
+            >
+              Copy to clipboard
+            </Button>
+            <Button
+              onClick={saveAsTextFile}
+              variant="outline"
+              className="tut-copy-button w-[30%] max-md:w-full text-black dark:text-white border-2 p-6 font-bold"
+            >
+              Save as text file
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-col w-1/2 space-y-6 max-h-[500px] overflow-y-auto max-md:w-full">
