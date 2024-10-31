@@ -40,13 +40,16 @@ export default function OdiaKeyboard() {
   };
 
   useEffect(() => {
-    const introShown = localStorage.getItem('introShown');
+    const introShown = localStorage.getItem("introShown");
     if (introShown) return;
-    introJs().setOptions({
-      steps
-    }).start().then(() => {
-      localStorage.setItem('introShown', true);
-    })
+    introJs()
+      .setOptions({
+        steps,
+      })
+      .start()
+      .then(() => {
+        localStorage.setItem("introShown", true);
+      });
   }, []);
 
   useEffect(() => {
@@ -54,37 +57,38 @@ export default function OdiaKeyboard() {
       if (keyToBoxMap.hasOwnProperty(e.key)) {
         scrollToTheBox(keyToBoxMap[e.key]);
       }
-    }
+    };
     const scrollToTheBox = (index) => {
       let selectedBox = document.querySelector(`.box-${index}`);
       if (selectedBox) {
-        selectedBox.scrollIntoView({ behavior: 'smooth' });
+        selectedBox.scrollIntoView({ behavior: "smooth" });
       }
-    }
+    };
 
-    document.addEventListener('keydown', keyDownEvents);
+    document.addEventListener("keydown", keyDownEvents);
 
     return () => {
-      document.removeEventListener('keydown', keyDownEvents);
-    }
-  }, [])
+      document.removeEventListener("keydown", keyDownEvents);
+    };
+  }, []);
 
   const saveAsTextFile = () => {
     const currentText = textAreaRef.current.value;
 
-    if (!currentText) return toast({
-      title: "No text to save",
-      description: "Please type something before saving"
-    })
+    if (!currentText)
+      return toast({
+        title: "No text to save",
+        description: "Please type something before saving",
+      });
 
-    const a = document.createElement('a')
-    const file = new Blob([currentText], { type: 'text/plain' });
-    const date = new Date().getMilliseconds()
+    const a = document.createElement("a");
+    const file = new Blob([currentText], { type: "text/plain" });
+    const date = new Date().getMilliseconds();
 
     a.href = URL.createObjectURL(file);
-    a.download = `${date}-odia-file.txt`
+    a.download = `${date}-odia-file.txt`;
     a.click();
-  }
+  };
 
   return (
     <div className="min-h-screen dark:bg-black relative dark:text-white flex flex-col items-center justify-center p-8 w-full">
@@ -94,7 +98,9 @@ export default function OdiaKeyboard() {
       <div className="absolute top-7 right-[10%] tut-theme-change">
         <ThemeToggle />
       </div>
-      <h1 className="text-4xl font-bold mb-8 text-center max-md:text-2xl max-md:mb-4">Odia Keyboard</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center max-md:text-2xl max-md:mb-4">
+        Odia Keyboard
+      </h1>
 
       <div className="flex w-full max-w-6xl space-x-8 max-md:flex-col max-md:justify-center max-md:items-center">
         <div className="flex flex-col w-1/2 sticky max-md:relative top-8 max-md:w-full max-md:mb-20">
@@ -140,4 +146,3 @@ export default function OdiaKeyboard() {
     </div>
   );
 }
-
